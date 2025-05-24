@@ -1,0 +1,46 @@
+# Django
+*.log
+*.pot
+*.pyc
+__pycache__/
+db.sqlite3
+local_settings.py
+.env
+venv/
+.venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# VS Code
+.vscode/
+
+# PyCharm
+.idea/
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+
+# Git
+*.orig
+
+# Migrations (optional to ignore if you're resetting often)
+**/migrations/*.py
+!**/migrations/__init__.py
+
+# Media files (optional, in dev only)
+media/
+
+# Staticfiles (when using collectstatic)
+staticfiles/
+
+# coverage/testing
+htmlcov/
+.coverage
+.tox/
+.nox/
+pytest_cache/

@@ -1,0 +1,139 @@
+{% extends 'core/base.html' %} {% block title %}Edit Recipe |
+ReciSwap{%endblock%} {% block content %}
+<div
+  class="max-w-3xl mx-auto px-6 py-10 bg-white dark:bg-slate-900 rounded-xl shadow-lg"
+>
+  <div class="mb-10">
+    <h2 class="text-4xl font-extrabold text-gray-800 dark:text-white mb-2">
+      Edit Recipe:
+      <span class="text-amber-600 dark:text-amber-500">{{ recipe.title }}</span>
+    </h2>
+    <div class="w-20 h-1 bg-amber-500 rounded-full"></div>
+  </div>
+
+  <form method="POST" enctype="multipart/form-data" class="space-y-8">
+    {% csrf_token %} {% for field in form %}
+    <div class="flex flex-col gap-2">
+      <label
+        for="{{ field.id_for_label }}"
+        class="text-lg font-medium text-gray-700 dark:text-gray-300"
+      >
+        {{ field.label }} {% if field.field.required %}<span
+          class="text-red-500 ml-1"
+          >*</span
+        >{% endif %}
+      </label>
+
+      {{ field }} {% if field.help_text %}
+      <p class="text-sm text-gray-500 dark:text-gray-400 italic">
+        {{ field.help_text }}
+      </p>
+      {% endif %} {% if field.errors %}
+      <p class="text-sm text-red-600 dark:text-red-400 mt-1">
+        {{ field.errors|striptags }}
+      </p>
+      {% endif %}
+    </div>
+    {% endfor %}
+
+    <div class="pt-4">
+      <button
+        type="submit"
+        class="w-full bg-amber-600 hover:bg-amber-700 text-white font-bold py-3.5 px-6 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl active:scale-[0.98] dark:bg-amber-700 dark:hover:bg-amber-800"
+      >
+        Save Changes
+      </button>
+    </div>
+  </form>
+</div>
+
+<style>
+  /* Base input styles */
+  input:not([type="checkbox"]):not([type="radio"]),
+  textarea,
+  select {
+    width: 100%;
+    padding: 0.8rem 1.2rem;
+    border: 2px solid #e5e7eb;
+    border-radius: 0.75rem;
+    background-color: #f9fafb;
+    color: #1f2937;
+    font-size: 1rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Focus states */
+  input:focus,
+  textarea:focus,
+  select:focus {
+    outline: none;
+    border-color: #f59e0b;
+    background-color: #ffffff;
+    box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.2);
+  }
+
+  /* Dark mode styles */
+  .dark input:not([type="checkbox"]):not([type="radio"]),
+  .dark textarea,
+  .dark select {
+    background-color: #1e293b;
+    border-color: #334155;
+    color: #f8fafc;
+  }
+
+  .dark input:focus,
+  .dark textarea:focus,
+  .dark select:focus {
+    background-color: #0f172a;
+    border-color: #f59e0b;
+    box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.3);
+  }
+
+  /* Checkbox and radio styles */
+  input[type="checkbox"],
+  input[type="radio"] {
+    width: 1.25rem;
+    height: 1.25rem;
+    accent-color: #f59e0b;
+  }
+
+  .dark input[type="checkbox"],
+  .dark input[type="radio"] {
+    accent-color: #f59e0b;
+  }
+
+  /* File input styles */
+  input[type="file"] {
+    padding: 0.75rem;
+    background-color: transparent;
+    border: 2px dashed #d1d5db;
+    cursor: pointer;
+  }
+
+  .dark input[type="file"] {
+    border-color: #475569;
+    background-color: rgba(30, 41, 59, 0.5);
+  }
+
+  /* Textarea specific styles */
+  textarea {
+    min-height: 150px;
+    resize: vertical;
+  }
+
+  /* Select dropdown arrow */
+  select {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+    background-position: right 0.75rem center;
+    background-repeat: no-repeat;
+    background-size: 1.5em 1.5em;
+    padding-right: 2.5rem;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .dark select {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%239ca3af' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+  }
+</style>
+{% endblock %}

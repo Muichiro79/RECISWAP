@@ -1,0 +1,38 @@
+{% extends 'core/base.html' %} {% block title %}Home | ReciSwap{%endblock%}
+{%block content%}
+<section class="max-w-5xl mx-auto p-6">
+  <h2 class="text-3xl font-bold mb-6">Latest Recipes</h2>
+
+  {% if recipes %}
+  <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    {% for recipe in recipes %}
+    <a href="{% url 'recipe_detail' recipe.id %}" class="block">
+      <article
+        class="bg-white dark:bg-slate-800 rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300"
+      >
+        {% if recipe.image %}
+        <img
+          src="{{ recipe.image.url }}"
+          alt="{{ recipe.name }}"
+          class="w-full h-48 object-cover"
+        />
+        {% endif %}
+        <div class="p-4">
+          <h3 class="text-xl font-semibold text-gray-800 dark:text-gray-100">
+            {{ recipe.name }}
+          </h3>
+        </div>
+      </article>
+    </a>
+    {% endfor %}
+  </div>
+  {% else %}
+  <p class="text-gray-700 dark:text-gray-300 text-center mt-10 text-lg">
+    No recipes found yet. Be the first to
+    <a href="{% url 'add_recipe' %}" class="text-indigo-500 hover:underline"
+      >add one</a
+    >!
+  </p>
+  {% endif %}
+</section>
+{% endblock %}
